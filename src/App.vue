@@ -21,6 +21,7 @@ body {
 	box-sizing: border-box;
 	font-family: 'Poppins', sans-serif;
 	color: #2d2d2a;
+	min-height: 100vh;
 }
 
 *,

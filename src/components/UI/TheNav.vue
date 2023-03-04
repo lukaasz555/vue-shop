@@ -2,6 +2,8 @@
 	<nav>
 		<RouterLink to="/">Home</RouterLink>
 		<RouterLink to="/albums">Albums</RouterLink>
+		<RouterLink to="/contact">Contact</RouterLink>
+		<RouterLink to="/cart">Cart</RouterLink>
 	</nav>
 </template>
 
@@ -11,4 +13,16 @@ import { defineComponent } from 'vue';
 export default defineComponent({});
 </script>
 
-<style scoped></style>
+<style scoped>
+a {
+	color: #4c4c47;
+}
+
+a:not(:last-child) {
+	margin: 0 0.75em;
+}
+
+a:hover {
+	text-decoration: underline;
+}
+</style>
