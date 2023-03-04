@@ -13,7 +13,9 @@
 
 			<p :class="{ unavailable: price < 1 }">
 				{{
-					price > 0 ? `${String(price).replace('.', ',')} zł` : 'unavailable'
+					price > 0
+						? `${String(price.toFixed(2)).replace('.', ',')} zł`
+						: 'unavailable'
 				}}
 			</p>
 		</section>
