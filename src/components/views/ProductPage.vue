@@ -23,9 +23,7 @@
 					<p>
 						{{ String(currentProduct.price.toFixed(2)).replace('.', ',') }} zł
 					</p>
-					<button @click="addToCart" class="addToCartButton">
-						Add to cart
-					</button>
+					<the-button @click="addToCart"> Add to cart </the-button>
 				</section>
 			</header>
 		</main>
@@ -145,24 +143,6 @@ div > img {
 
 .goBackButton:hover {
 	text-decoration: underline;
-}
-
-.addToCartButton {
-	background-color: transparent;
-	border: 1px solid #2e2e2e;
-	padding: 0.75em 1.5em;
-	font-size: 14px;
-	text-transform: uppercase;
-	cursor: pointer;
-	background-color: #2e2e2e;
-	color: white;
-	transition: color 0.2s, background-color 0.2s;
-	margin-top: 0.5em;
-}
-
-.addToCartButton:hover {
-	color: #2e2e2e;
-	background-color: transparent;
 }
 
 .product__price {
