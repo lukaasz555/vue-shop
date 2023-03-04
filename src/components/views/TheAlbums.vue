@@ -78,6 +78,7 @@ main.products__container {
 	display: flex;
 	flex-wrap: wrap;
 	justify-content: center;
+	margin-top: 2em;
 }
 
 main.info {

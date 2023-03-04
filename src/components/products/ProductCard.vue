@@ -4,9 +4,18 @@
 			<img :src="img" :alt="title" />
 		</section>
 		<section>
-			<h3>{{ title }}</h3>
+			<h3>
+				<RouterLink :to="'/albums/' + id">
+					{{ title }}
+				</RouterLink>
+			</h3>
 			<h4>{{ authors.join(', ') }}</h4>
-			<p>{{ String(price).replace('.', ',') }} zł</p>
+
+			<p :class="{ unavailable: price < 1 }">
+				{{
+					price > 0 ? `${String(price).replace('.', ',')} zł` : 'unavailable'
+				}}
+			</p>
 		</section>
 	</div>
 </template>
@@ -36,10 +45,13 @@ export default defineComponent({
 img {
 	height: 180px;
 	width: 180px;
+	border-radius: 4px;
 }
 
 h3,
+h3 a,
 h4 {
+	color: #2e2e2e;
 	font-weight: 500;
 	text-align: center;
 }
@@ -72,5 +84,10 @@ button {
 button:hover {
 	color: #2e2e2e;
 	background-color: transparent;
+}
+
+.unavailable {
+	color: #4c4c47;
+	opacity: 0.75;
 }
 </style>

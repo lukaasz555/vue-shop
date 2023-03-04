@@ -4,6 +4,7 @@ import TheAlbums from '../components/views/TheAlbums.vue';
 import NotFound from '../components/views/NotFound.vue';
 import TheContact from '../components/views/TheContact.vue';
 import TheCart from '../components/views/TheCart.vue';
+import ProductPage from '../components/views/ProductPage.vue';
 
 const routes = [
 	{
@@ -28,6 +29,11 @@ const routes = [
 		path: '/cart',
 		name: 'Cart',
 		component: TheCart,
+	},
+	{
+		path: '/albums/:id',
+		name: 'Id',
+		component: ProductPage,
 	},
 
 	{
