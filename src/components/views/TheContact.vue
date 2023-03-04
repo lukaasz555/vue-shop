@@ -1,9 +1,22 @@
 <template>
-	<h1>maybe some contact details will be provided</h1>
+	<h1>Contact with us</h1>
+	<contact-form></contact-form>
 </template>
 
 <script lang="ts">
 import { defineComponent } from 'vue';
+import ContactForm from '../Forms/ContactForm.vue';
 
-export default defineComponent({});
+export default defineComponent({
+	components: {
+		ContactForm,
+	},
+});
 </script>
+
+<style scoped>
+h1 {
+	text-align: center;
+	margin-bottom: 1em;
+}
+</style>
