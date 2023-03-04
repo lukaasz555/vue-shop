@@ -1,7 +1,7 @@
 <template>
-	<main v-if="isLoading" class="info">
+	<the-message v-if="isLoading">
 		<h2>fetching products ...</h2>
-	</main>
+	</the-message>
 
 	<div v-else>
 		<main v-if="!isError && products.length > 0" class="products__container">
@@ -16,7 +16,7 @@
 				:img="prod.img"
 			></ProductCard>
 		</main>
-		<main v-else class="info">
+		<the-message>
 			<h2 v-if="isError">
 				Couldn't fetch products, try again. <br />
 				:(
@@ -25,7 +25,7 @@
 				Currently we don't have any products <br />
 				:(
 			</h2>
-		</main>
+		</the-message>
 	</div>
 </template>
 

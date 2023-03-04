@@ -1,6 +1,6 @@
 <template>
 	<div>
-		<main>
+		<main v-if="products.length > 0">
 			<h2>{{ title }}</h2>
 			<ul v-for="(prod, i) in products" :key="i + prod.id">
 				<ProductInCart
@@ -12,6 +12,11 @@
 			</ul>
 			<p class="totalValue">TOTAL: {{ totalValue }}</p>
 			<the-button> next </the-button>
+		</main>
+		<main v-else>
+			<h2>{{ title }}</h2>
+			<p>... is currently empty</p>
+			<p><RouterLink to="/albums">click here</RouterLink> to pick something</p>
 		</main>
 	</div>
 </template>
@@ -71,5 +76,13 @@ h2 {
 .totalValue {
 	font-size: 20px;
 	margin: 1em 0 0.5em;
+}
+
+p a {
+	color: #64a6bd;
+}
+
+p a:hover {
+	text-decoration: underline;
 }
 </style>
