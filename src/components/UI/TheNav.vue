@@ -3,14 +3,20 @@
 		<RouterLink to="/">Home</RouterLink>
 		<RouterLink to="/albums">Albums</RouterLink>
 		<RouterLink to="/contact">Contact</RouterLink>
-		<RouterLink to="/cart">Cart</RouterLink>
+		<RouterLink to="/cart">Cart{{ qty > 0 ? `: ${qty}` : null }}</RouterLink>
 	</nav>
 </template>
 
 <script lang="ts">
 import { defineComponent } from 'vue';
 
-export default defineComponent({});
+export default defineComponent({
+	computed: {
+		qty() {
+			return this.$store.getters.cartQty;
+		},
+	},
+});
 </script>
 
 <style scoped>

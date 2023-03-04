@@ -23,7 +23,9 @@
 					<p>
 						{{ String(currentProduct.price.toFixed(2)).replace('.', ',') }} zł
 					</p>
-					<button class="addToCartButton">Add to cart</button>
+					<button @click="addToCart" class="addToCartButton">
+						Add to cart
+					</button>
 				</section>
 			</header>
 		</main>
@@ -70,6 +72,12 @@ export default defineComponent({
 		};
 	},
 
+	methods: {
+		addToCart() {
+			this.$store.commit('ADD_PRODUCT', this.currentProduct);
+		},
+	},
+
 	mounted() {
 		axios
 			.get(`http://localhost:4000/products/${this.$route.params.id}`)
@@ -79,7 +87,6 @@ export default defineComponent({
 					this.$router.push(`/404`);
 				}
 				this.isError = false;
-				console.log(this.currentProduct);
 			})
 			.catch((err) => {
 				console.log(err.name);
@@ -104,6 +111,12 @@ div {
 	justify-content: center;
 	padding: 0 2em;
 	margin-bottom: 3em;
+}
+
+header {
+	display: flex;
+	flex-direction: column;
+	align-items: start;
 }
 
 .product__details {
@@ -158,6 +171,10 @@ div > img {
 	flex-direction: column;
 	align-items: center;
 	margin-top: 2em;
+	padding-top: 1em;
+	width: 90%;
+	border-top: 1px solid rgba(0, 0, 0, 0.1);
+	align-self: center;
 }
 
 .product__price p {
