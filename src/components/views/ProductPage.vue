@@ -1,13 +1,13 @@
 <template>
-	<main v-if="isLoading" class="info">
+	<the-message v-if="isLoading">
 		<h2>fetching data...</h2>
-	</main>
+	</the-message>
 
 	<div v-else>
-		<button @click="$router.back" class="goBackButton">
-			{{ buttonContent }}
-		</button>
 		<main v-if="!isError" class="product__wrapper">
+			<button @click="$router.back" class="goBackButton">
+				{{ buttonContent }}
+			</button>
 			<header>
 				<div>
 					<img :src="currentProduct.img" :alt="currentProduct.title" />
@@ -27,9 +27,9 @@
 				</section>
 			</header>
 		</main>
-		<main v-else class="info">
+		<the-message v-else>
 			<h2>couldn't fetch product</h2>
-		</main>
+		</the-message>
 	</div>
 </template>
 
@@ -119,13 +119,6 @@ header {
 
 .product__details {
 	margin-top: 2em;
-}
-
-.info {
-	height: 80vh;
-	display: flex;
-	justify-content: center;
-	align-items: center;
 }
 
 div > img {
