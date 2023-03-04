@@ -1,7 +1,9 @@
 <template>
 	<div class="card__wrapper">
 		<section>
-			<img :src="img" :alt="title" />
+			<RouterLink :to="'/albums/' + id">
+				<img :src="img" :alt="title" />
+			</RouterLink>
 		</section>
 		<section>
 			<h3>
@@ -34,14 +36,32 @@ export default defineComponent({
 .card__wrapper {
 	display: flex;
 	margin: 1em;
-	box-shadow: 4px 8px 20px rgba(0, 0, 0, 0.05);
-	padding: 1em;
+	padding: 2em 1em;
 	display: flex;
 	flex-direction: column;
 	align-items: center;
 	flex-wrap: wrap;
 	width: 300px;
 	border-radius: 8px;
+	position: relative;
+}
+
+.card__wrapper::before {
+	content: '';
+	position: absolute;
+	left: 0;
+	top: 0;
+	width: 100%;
+	height: 100%;
+	border-radius: 8px;
+	box-shadow: 4px 8px 20px rgba(0, 0, 0, 1);
+	opacity: 0.05;
+	transition: opacity 0.4s;
+	z-index: -10;
+}
+
+.card__wrapper:hover::before {
+	opacity: 0.2;
 }
 
 img {

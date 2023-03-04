@@ -56,7 +56,7 @@ export default defineComponent({
 		axios
 			.get('http://localhost:4000/products/albums')
 			.then((res) => {
-				this.products = res.data.slice(0, 5);
+				this.products = res.data.slice(0, 10);
 				this.isError = false;
 				if (res.status === 204) {
 					this.isError = true;
