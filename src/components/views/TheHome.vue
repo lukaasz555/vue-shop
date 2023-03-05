@@ -1,5 +1,7 @@
 <template>
-	<h1>home</h1>
+	<the-message>
+		<h1>/home</h1>
+	</the-message>
 </template>
 
 <script lang="ts">
