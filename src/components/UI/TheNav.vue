@@ -9,10 +9,10 @@
 
 <script setup lang="ts">
 import { useCartStore } from '@/store/store';
+import { computed } from '@vue/reactivity';
 
 const store = useCartStore();
-
-const qty = store.itemsQty;
+const qty = computed(() => store.itemsQty);
 </script>
 
 <style scoped>

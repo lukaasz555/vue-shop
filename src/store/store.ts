@@ -25,8 +25,5 @@ export const useCartStore = defineStore('cart', {
 			const idx = this.products.findIndex((el) => el.id === id);
 			this.products.splice(idx, 1);
 		},
-		$resetCart() {
-			this.products = [];
-		},
 	},
 });
