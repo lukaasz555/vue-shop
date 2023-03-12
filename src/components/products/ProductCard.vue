@@ -98,13 +98,13 @@ img {
 h3,
 h3 a,
 h4 {
-	color: #2e2e2e;
+	color: var(--black);
 	font-weight: 500;
 	text-align: center;
 }
 
 h4 {
-	color: #4c4c47;
+	color: var(--darkGray);
 	opacity: 0.85;
 }
 
@@ -116,7 +116,7 @@ section:last-child {
 }
 
 .unavailable {
-	color: #4c4c47;
+	color: var(--darkGray);
 	opacity: 0.75;
 }
 </style>

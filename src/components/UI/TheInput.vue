@@ -52,8 +52,8 @@ input {
 	padding: 0.5em;
 	font-family: inherit;
 	background-color: transparent;
-	border: 1px solid #4c4c47;
-	outline-color: #2e2e2e;
+	border: 1px solid var(--darkGray);
+	outline-color: var(--black);
 	width: 100%;
 	font-size: 16px;
 	margin-bottom: 0.75em;
@@ -62,6 +62,6 @@ input {
 p {
 	text-align: left;
 	width: 100%;
-	color: rgb(255, 70, 70);
+	color: var(--red);
 }
 </style>

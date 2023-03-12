@@ -23,6 +23,6 @@ li {
 }
 
 a {
-	color: black;
+	color: var(--black);
 }
 </style>
