@@ -7,16 +7,10 @@
 	</nav>
 </template>
 
-<script lang="ts">
-import { defineComponent } from 'vue';
-
-export default defineComponent({
-	computed: {
-		qty() {
-			return this.$store.getters.cartQty;
-		},
-	},
-});
+<script setup lang="ts">
+import { computed } from '@vue/reactivity';
+import { store } from '@/store/store';
+const qty = computed(() => store.getters.cartQty);
 </script>
 
 <style scoped>

@@ -1,22 +1,12 @@
 <template>
 	<header>
-		<h1>{{ pageTitle }}</h1>
+		<h1>Vue test</h1>
 		<the-nav></the-nav>
 	</header>
 </template>
 
-<script lang="ts">
-import { defineComponent } from 'vue';
+<script setup lang="ts">
 import TheNav from './TheNav.vue';
-
-export default defineComponent({
-	data() {
-		return {
-			pageTitle: 'Test Shop Vue + ts',
-		};
-	},
-	components: { TheNav },
-});
 </script>
 
 <style scoped>
