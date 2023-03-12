@@ -1,39 +1,37 @@
 <template>
 	<form @submit.prevent="">
-		<div>
-			<label for="name">Name:</label>
-			<input
-				type="text"
-				name="name"
-				id="name"
-				v-model="state.formValues.name"
-			/>
-		</div>
+		<the-input
+			label="Name"
+			id="name"
+			name="name"
+			type="text"
+			:value="state.formValues.name"
+			@input="state.formValues.name = $event.target.value"
+		></the-input>
 
-		<div>
-			<label for="email">Email:</label>
-			<input
-				type="email"
-				name="email"
-				id="email"
-				v-model="state.formValues.email"
-			/>
-		</div>
+		<the-input
+			label="Email"
+			id="email"
+			name="email"
+			type="email"
+			:value="state.formValues.email"
+			@input="state.formValues.email = $event.target.value"
+		></the-input>
 
-		<div>
-			<label for="phone">Phone:</label>
-			<input
-				type="phone"
-				name="phone"
-				id="phone"
-				v-model="state.formValues.phone"
-			/>
-		</div>
+		<the-input
+			label="Phone"
+			id="phone"
+			name="phone"
+			type="phone"
+			:value="state.formValues.phone"
+			@input="state.formValues.phone = $event.target.value"
+		></the-input>
 
-		<div>
-			<label>Message:</label>
-			<textarea rows="6" v-model="state.formValues.message" />
-		</div>
+		<the-textarea
+			:value="state.formValues.message"
+			label="Message"
+			@input="state.formValues.message = $event.target.value"
+		></the-textarea>
 		<div>
 			<the-button @click="printInfo">send</the-button>
 		</div>
@@ -42,15 +40,9 @@
 
 <script setup lang="ts">
 import { reactive } from 'vue';
-
-interface ContactFormData {
-	formValues: {
-		name: string;
-		email: string;
-		phone: string;
-		message: string;
-	};
-}
+import { ContactFormData } from '../../models/ContactFormData';
+import TheInput from '../UI/TheInput.vue';
+import TheTextarea from '../UI/TheTextarea.vue';
 
 const state: ContactFormData = reactive({
 	formValues: {
@@ -62,25 +54,6 @@ const state: ContactFormData = reactive({
 });
 
 const printInfo = () => console.log(state.formValues);
-
-// import { defineComponent } from 'vue';
-// export default defineComponent({
-// 	data() {
-// 		return {
-// 			formValues: {
-// 				name: '',
-// 				email: '',
-// 				phone: '',
-// 				message: '',
-// 			},
-// 		};
-// 	},
-// 	methods: {
-// 		printInfo() {
-// 			console.log(this.formValues);
-// 		},
-// 	},
-// });
 </script>
 
 <style scoped>
@@ -90,6 +63,7 @@ form {
 	max-width: 500px;
 	margin: 0 auto;
 }
+
 div {
 	display: flex;
 	flex-direction: column;
@@ -97,33 +71,5 @@ div {
 	justify-content: flex-start;
 	margin-bottom: 0.5em;
 	width: 100%;
-}
-
-label {
-	width: 100%;
-	font-size: 18px;
-	margin-bottom: 0.25em;
-}
-
-input {
-	padding: 0.5em;
-	font-family: inherit;
-	background-color: transparent;
-	border: 1px solid #4c4c47;
-	outline-color: #2e2e2e;
-	width: 100%;
-	font-size: 16px;
-	margin-bottom: 0.75em;
-}
-
-textarea {
-	padding: 0.5em;
-	font-family: inherit;
-	background-color: transparent;
-	border: 1px solid #4c4c47;
-	outline-color: #2e2e2e;
-	width: 100%;
-	resize: vertical;
-	font-size: 16px;
 }
 </style>
