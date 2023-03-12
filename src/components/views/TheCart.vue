@@ -2,6 +2,7 @@
 	<div>
 		<main v-if="products.length > 0">
 			<h2>Your cart</h2>
+			<button @click="store.$reset()">clear cart</button>
 			<ul v-for="(prod, i) in products" :key="i + prod.id">
 				<ProductInCart
 					:id="prod.id"
@@ -27,10 +28,11 @@ import TheButton from '../UI/TheButton.vue';
 import { getTotalValue } from '@/helpers/getTotalValue';
 import { handlePriceFormat } from '@/helpers/handlePriceFormat';
 import { useCartStore } from '@/store/store';
+import { computed } from '@vue/reactivity';
 
 const store = useCartStore();
-const products = store.products;
-const totalValue = getTotalValue(products);
+const products = computed(() => store.products);
+const totalValue = computed(() => getTotalValue(store.products));
 </script>
 
 <style scoped>
@@ -53,7 +55,7 @@ main {
 }
 
 h2 {
-	margin-bottom: 1.5em;
+	margin-bottom: 0em;
 }
 
 .totalValue {
@@ -66,6 +68,17 @@ p a {
 }
 
 p a:hover {
+	text-decoration: underline;
+}
+
+button {
+	margin-bottom: 2em;
+	border: none;
+	background: transparent;
+	cursor: pointer;
+}
+
+button:hover {
 	text-decoration: underline;
 }
 </style>

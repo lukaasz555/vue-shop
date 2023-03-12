@@ -6,6 +6,8 @@ interface State {
 	products: ProductModel[];
 }
 
+const getID = (arr: ProductModel[], id: string) => {};
+
 export const useCartStore = defineStore('cart', {
 	state: (): State => {
 		return {
@@ -19,8 +21,12 @@ export const useCartStore = defineStore('cart', {
 		addToCart(item: ProductModel) {
 			this.products.push(item);
 		},
-		removeFromCart(item: ProductModel) {
-			this.products = this.products.filter((p) => p.id !== item.id);
+		removeFromCart(id: string) {
+			const idx = this.products.findIndex((el) => el.id === id);
+			this.products.splice(idx, 1);
+		},
+		$resetCart() {
+			this.products = [];
 		},
 	},
 });

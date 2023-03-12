@@ -18,7 +18,6 @@
 				:discount="prod.discount"
 				:img="prod.img"
 			></ProductCard>
-			<p v-for="prod in state.products" :key="prod.id">{{ prod.title }}</p>
 		</main>
 		<the-message>
 			<h2 v-if="state.isError">
