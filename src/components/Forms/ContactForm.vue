@@ -2,22 +2,37 @@
 	<form @submit.prevent="">
 		<div>
 			<label for="name">Name:</label>
-			<input type="text" name="name" id="name" v-model="formValues.name" />
+			<input
+				type="text"
+				name="name"
+				id="name"
+				v-model="state.formValues.name"
+			/>
 		</div>
 
 		<div>
 			<label for="email">Email:</label>
-			<input type="email" name="email" id="email" v-model="formValues.email" />
+			<input
+				type="email"
+				name="email"
+				id="email"
+				v-model="state.formValues.email"
+			/>
 		</div>
 
 		<div>
 			<label for="phone">Phone:</label>
-			<input type="phone" name="phone" id="phone" v-model="formValues.phone" />
+			<input
+				type="phone"
+				name="phone"
+				id="phone"
+				v-model="state.formValues.phone"
+			/>
 		</div>
 
 		<div>
 			<label>Message:</label>
-			<textarea rows="6" v-model="formValues.message" />
+			<textarea rows="6" v-model="state.formValues.message" />
 		</div>
 		<div>
 			<the-button @click="printInfo">send</the-button>
@@ -25,25 +40,47 @@
 	</form>
 </template>
 
-<script lang="ts">
-import { defineComponent } from 'vue';
-export default defineComponent({
-	data() {
-		return {
-			formValues: {
-				name: '',
-				email: '',
-				phone: '',
-				message: '',
-			},
-		};
-	},
-	methods: {
-		printInfo() {
-			console.log(this.formValues);
-		},
+<script setup lang="ts">
+import { reactive } from 'vue';
+
+interface ContactFormData {
+	formValues: {
+		name: string;
+		email: string;
+		phone: string;
+		message: string;
+	};
+}
+
+const state: ContactFormData = reactive({
+	formValues: {
+		name: '',
+		email: '',
+		phone: '',
+		message: '',
 	},
 });
+
+const printInfo = () => console.log(state.formValues);
+
+// import { defineComponent } from 'vue';
+// export default defineComponent({
+// 	data() {
+// 		return {
+// 			formValues: {
+// 				name: '',
+// 				email: '',
+// 				phone: '',
+// 				message: '',
+// 			},
+// 		};
+// 	},
+// 	methods: {
+// 		printInfo() {
+// 			console.log(this.formValues);
+// 		},
+// 	},
+// });
 </script>
 
 <style scoped>

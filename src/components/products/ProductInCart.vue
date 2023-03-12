@@ -1,16 +1,17 @@
 <template>
 	<li>
-		<p>{{ title }}</p>
+		<RouterLink :to="'/albums/' + id">
+			<p>{{ title }}</p>
+		</RouterLink>
 		<p>{{ String(price.toFixed(2).replace('.', ',')) }}zł</p>
 	</li>
 </template>
 
-<script lang="ts">
-import { defineComponent } from 'vue';
+<script setup lang="ts">
+import { defineProps, toRefs } from 'vue';
 
-export default defineComponent({
-	props: ['id', 'title', 'price'],
-});
+const props = defineProps(['id', 'title', 'price']);
+const { id, title, price } = toRefs(props);
 </script>
 
 <style scoped>
@@ -19,5 +20,9 @@ li {
 	justify-content: space-between;
 	width: 280px;
 	margin-bottom: 0.5em;
+}
+
+a {
+	color: black;
 }
 </style>
