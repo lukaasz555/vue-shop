@@ -3,14 +3,14 @@
 		<RouterLink to="/">Home</RouterLink>
 		<RouterLink to="/albums">Albums</RouterLink>
 		<RouterLink to="/contact">Contact</RouterLink>
-		<RouterLink to="/cart">Cart{{ qty > 0 ? `: ${qty}` : null }}</RouterLink>
+		<!-- <RouterLink to="/cart">Cart{{ qty > 0 ? `: ${qty}` : null }}</RouterLink> -->
 	</nav>
 </template>
 
 <script setup lang="ts">
-import { computed } from '@vue/reactivity';
-import { store } from '@/store/store';
-const qty = computed(() => store.getters.cartQty);
+// import { computed } from '@vue/reactivity';
+// import { store } from '@/store/store';
+// const qty = computed(() => store.getters.cartQty);
 </script>
 
 <style scoped>

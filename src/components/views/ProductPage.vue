@@ -29,7 +29,7 @@
 						}}
 						zł
 					</p>
-					<the-button @click="addToCart"> Add to cart </the-button>
+					<the-button> Add to cart </the-button>
 				</section>
 			</header>
 		</main>
@@ -42,7 +42,7 @@
 <script setup lang="ts">
 import { reactive, onMounted } from 'vue';
 import { useRouter, useRoute } from 'vue-router';
-import { store } from '../../store/store';
+// import { store } from '../../store/store';
 import { ProductPageData } from '../../models/PagesData';
 import axios from 'axios';
 
@@ -89,7 +89,7 @@ onMounted(() => {
 		.finally(() => (state.isLoading = false));
 });
 
-const addToCart = () => store.commit('ADD_PRODUCT', state.currentProduct);
+// const addToCart = () => store.commit('ADD_PRODUCT', state.currentProduct);
 </script>
 
 <style scoped>

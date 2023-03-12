@@ -1,6 +1,6 @@
 <template>
 	<div>
-		<main v-if="products.length > 0">
+		<!-- 		<main v-if="products.length > 0">
 			<h2>Your cart</h2>
 			<ul v-for="(prod, i) in products" :key="i + prod.id">
 				<ProductInCart
@@ -17,23 +17,22 @@
 			<h2>Your cart</h2>
 			<p>... is currently empty</p>
 			<p><RouterLink to="/albums">click here</RouterLink> to pick something</p>
-		</main>
+		</main> -->
 	</div>
 </template>
 
 <script setup lang="ts">
-import ProductInCart from '../products/ProductInCart.vue';
-import TheButton from '../UI/TheButton.vue';
-import { getTotalValue } from '@/helpers/getTotalValue';
-import { handlePriceFormat } from '@/helpers/handlePriceFormat';
-import { computed } from '@vue/reactivity';
-import { store } from '@/store/store';
+// import ProductInCart from '../products/ProductInCart.vue';
+// import TheButton from '../UI/TheButton.vue';
+// import { getTotalValue } from '@/helpers/getTotalValue';
+// import { handlePriceFormat } from '@/helpers/handlePriceFormat';
+// import { computed } from '@vue/reactivity';
 
-const products = computed(() => store.getters.productsInCart);
-const totalValue = computed(() => {
-	const totalValue = getTotalValue(store.getters.productsInCart);
-	return handlePriceFormat(totalValue);
-});
+// const products = computed(() => store.getters.productsInCart);
+// const totalValue = computed(() => {
+// 	const totalValue = getTotalValue(store.getters.productsInCart);
+// 	return handlePriceFormat(totalValue);
+// });
 </script>
 
 <style scoped>
