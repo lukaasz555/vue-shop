@@ -24,12 +24,37 @@
 	</div>
 </template>
 
-<script lang="ts">
-import { defineComponent } from 'vue';
+<script setup lang="ts">
+import { defineProps, toRefs } from 'vue';
 
-export default defineComponent({
-	props: ['authors', 'title', 'price', 'discount', 'img', 'id'],
+const props = defineProps({
+	authors: {
+		type: Array,
+		required: true,
+	},
+	title: {
+		type: String,
+		required: true,
+	},
+	price: {
+		type: Number,
+		required: true,
+	},
+	discount: {
+		type: Number,
+		required: true,
+	},
+	id: {
+		type: String,
+		required: true,
+	},
+	img: {
+		type: String,
+		required: true,
+	},
 });
+
+const { price, img, id, title, authors } = toRefs(props);
 </script>
 
 <style scoped>

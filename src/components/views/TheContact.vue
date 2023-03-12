@@ -3,15 +3,8 @@
 	<contact-form></contact-form>
 </template>
 
-<script lang="ts">
-import { defineComponent } from 'vue';
+<script setup lang="ts">
 import ContactForm from '../Forms/ContactForm.vue';
-
-export default defineComponent({
-	components: {
-		ContactForm,
-	},
-});
 </script>
 
 <style scoped>

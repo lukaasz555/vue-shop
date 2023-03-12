@@ -1,12 +1,15 @@
 <template>
-	<the-message v-if="isLoading">
+	<the-message v-if="state.isLoading">
 		<h2>fetching products ...</h2>
 	</the-message>
 
 	<div v-else>
-		<main v-if="!isError && products.length > 0" class="products__container">
+		<main
+			v-if="!state.isError && state.products.length > 0"
+			class="products__container"
+		>
 			<ProductCard
-				v-for="prod in products"
+				v-for="prod in state.products"
 				:key="prod.id"
 				:id="prod.id"
 				:authors="prod.authors"
@@ -15,13 +18,14 @@
 				:discount="prod.discount"
 				:img="prod.img"
 			></ProductCard>
+			<p v-for="prod in state.products" :key="prod.id">{{ prod.title }}</p>
 		</main>
 		<the-message>
-			<h2 v-if="isError">
+			<h2 v-if="state.isError">
 				Couldn't fetch products, try again. <br />
 				:(
 			</h2>
-			<h2 v-else-if="!isError && products.length < 1">
+			<h2 v-else-if="!state.isError && state.products.length < 1">
 				Currently we don't have any products <br />
 				:(
 			</h2>
@@ -29,47 +33,33 @@
 	</div>
 </template>
 
-<script lang="ts">
-import axios from 'axios';
-import { defineComponent } from 'vue';
-import { ProductModel } from '../../models/Product';
+<script setup lang="ts">
+import { reactive, onMounted } from 'vue';
+import { AlbumsPageData } from '../../models/PagesData';
 import ProductCard from '../products/ProductCard.vue';
+import axios from 'axios';
 
-interface AlbumsData {
-	products: ProductModel[];
-	isError: boolean;
-	isLoading: boolean;
-}
+const state: AlbumsPageData = reactive({
+	isError: false,
+	isLoading: true,
+	products: [],
+});
 
-export default defineComponent({
-	data(): AlbumsData {
-		return {
-			products: [],
-			isError: false,
-			isLoading: true,
-		};
-	},
-	component: {
-		ProductCard,
-	},
-	created() {
-		axios
-			.get('http://localhost:4000/products/albums')
-			.then((res) => {
-				this.products = res.data.slice(0, 10);
-				this.isError = false;
-				if (res.status === 204) {
-					this.isError = true;
-				}
-			})
-			// eslint-disable-next-line no-unused-vars
-			.catch((err) => {
-				this.isError = true;
-				console.log('error');
-			})
-			.finally(() => (this.isLoading = false));
-	},
-	components: { ProductCard },
+onMounted(() => {
+	axios
+		.get('http://localhost:4000/products/albums')
+		.then((res) => {
+			state.products = res.data.slice(0, 10);
+			state.isError = false;
+			if (res.status === 204) {
+				state.isError = true;
+			}
+		})
+		// eslint-disable-next-line no-unused-vars
+		.catch((err) => {
+			state.isError = true;
+		})
+		.finally(() => (state.isLoading = false));
 });
 </script>
 

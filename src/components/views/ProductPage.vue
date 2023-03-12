@@ -1,27 +1,33 @@
 <template>
-	<the-message v-if="isLoading">
+	<the-message v-if="state.isLoading">
 		<h2>fetching data...</h2>
 	</the-message>
 
 	<div v-else>
-		<main v-if="!isError" class="product__wrapper">
+		<main v-if="!state.isError" class="product__wrapper">
 			<button @click="$router.back" class="goBackButton">
 				{{ buttonContent }}
 			</button>
 			<header>
 				<div>
-					<img :src="currentProduct.img" :alt="currentProduct.title" />
+					<img
+						:src="state.currentProduct.img"
+						:alt="state.currentProduct.title"
+					/>
 				</div>
 				<section class="product__details">
-					<h2>{{ currentProduct.title }}</h2>
-					<p>Title: {{ currentProduct.title }}</p>
-					<p>Authors: {{ currentProduct.authors.join(', ') }}</p>
-					<p>Release year: {{ currentProduct.releaseYear }}</p>
-					<p>Label: {{ currentProduct.label }}</p>
+					<h2>{{ state.currentProduct.title }}</h2>
+					<p>Title: {{ state.currentProduct.title }}</p>
+					<p>Authors: {{ state.currentProduct.authors.join(', ') }}</p>
+					<p>Release year: {{ state.currentProduct.releaseYear }}</p>
+					<p>Label: {{ state.currentProduct.label }}</p>
 				</section>
 				<section class="product__price">
 					<p>
-						{{ String(currentProduct.price.toFixed(2)).replace('.', ',') }} zł
+						{{
+							String(state.currentProduct.price.toFixed(2)).replace('.', ',')
+						}}
+						zł
 					</p>
 					<the-button @click="addToCart"> Add to cart </the-button>
 				</section>
@@ -33,66 +39,57 @@
 	</div>
 </template>
 
-<script lang="ts">
-import { defineComponent } from 'vue';
-import { ProductModel } from '@/models/Product';
+<script setup lang="ts">
+import { reactive, onMounted } from 'vue';
+import { useRouter, useRoute } from 'vue-router';
+import { store } from '../../store/store';
+import { ProductPageData } from '../../models/PagesData';
 import axios from 'axios';
 
-interface ProductPageData {
-	id: string;
-	isLoading: boolean;
-	isError: boolean;
-	buttonContent: string;
-	currentProduct: ProductModel;
-}
+const router = useRouter();
+const route = useRoute();
 
-export default defineComponent({
-	data(): ProductPageData {
-		return {
-			id: '',
-			isLoading: true,
-			isError: false,
-			buttonContent: '<< go back',
-			currentProduct: {
-				id: '',
-				title: '',
-				authors: [],
-				releaseYear: '',
-				description: '',
-				img: '',
-				thumbnail: '',
-				price: 0,
-				discount: 0,
-				categoryID: 0,
-				format: 'CD',
-				type: 'albums',
-			},
-		};
-	},
+const buttonContent = '<< go back';
 
-	methods: {
-		addToCart() {
-			this.$store.commit('ADD_PRODUCT', this.currentProduct);
-		},
-	},
-
-	mounted() {
-		axios
-			.get(`http://localhost:4000/products/${this.$route.params.id}`)
-			.then((res) => {
-				this.currentProduct = res.data;
-				if (res.status === 204) {
-					this.$router.push(`/404`);
-				}
-				this.isError = false;
-			})
-			.catch((err) => {
-				console.log(err.name);
-				this.isError = true;
-			})
-			.finally(() => (this.isLoading = false));
+const state: ProductPageData = reactive({
+	id: '',
+	isLoading: true,
+	isError: false,
+	currentProduct: {
+		id: '',
+		title: '',
+		authors: [],
+		releaseYear: '',
+		description: '',
+		img: '',
+		thumbnail: '',
+		price: 0,
+		discount: 0,
+		categoryID: 0,
+		format: 'CD',
+		type: 'albums',
 	},
 });
+
+onMounted(() => {
+	axios
+		.get(`http://localhost:4000/products/${route.params.id}`)
+		.then((res) => {
+			state.currentProduct = res.data;
+			if (res.status === 204) {
+				router.push(`/404`);
+				console.log('should redirect to 404');
+			}
+			state.isError = false;
+		})
+		.catch((err) => {
+			console.log(err.name);
+			state.isError = true;
+		})
+		.finally(() => (state.isLoading = false));
+});
+
+const addToCart = () => store.commit('ADD_PRODUCT', state.currentProduct);
 </script>
 
 <style scoped>
